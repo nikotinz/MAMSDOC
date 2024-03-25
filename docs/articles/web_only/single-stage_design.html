@@ -45,7 +45,7 @@
     <a class="dropdown-item" href="../../articles/web_only/reproducibility.html">Reproducibility</a>
     <a class="dropdown-item" href="../../articles/web_only/parallelisation.html">Parallelisation</a>
     <h6 class="dropdown-header" data-toc-skip>Design studies</h6>
-    <a class="dropdown-item" href="../../articles/ssd_webr/ssd_webr.html">Single stage design</a>
+    <a class="dropdown-item" href="../../articles/single-stage_design.html">Single stage design</a>
     <a class="dropdown-item" href="../../articles/web_only/multi-stage_design.html">Multi-stage design</a>
     <a class="dropdown-item" href="../../articles/web_only/evaluating_properties.html">Evaluating the properties of a design</a>
     <a class="dropdown-item" href="../../articles/web_only/step-down_design.html">A step-down design</a>
@@ -79,9 +79,103 @@
 
     
     
-<div class="section level2">
-<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
-</h2>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.4/ace.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.4/mode-r.min.js"></script><script type="module">
+  import { WebR } from 'https://webr.r-wasm.org/latest/webr.mjs';
+  
+  // Initialize shared WebR environment
+  async function initWebR() {
+    const webR = new WebR();
+    await webR.init();
+    await webR.evalRVoid(`{webr::install('MAMS')}`);
+    await webR.evalRVoid(`{library(MAMS)}`);
+    await webR.evalRVoid('options(device=function(...){webr::canvas(width=500, height=300)})');
+    return webR;
+  }
+
+  const webRPromise = initWebR(); // This promise will resolve with the initialized WebR object
+
+  // Define a shared shelter object
+  let shelter;
+
+  // Initialize editors
+  var editor = ace.edit("editor");
+  editor.setOptions({ fontSize: "11pt", maxLines: Infinity });
+  editor.session.setMode("ace/mode/r");
+  var currentContent = editor.getValue();
+  editor.setValue(currentContent.trim(), -1); // -1 sets the cursor at the start
+  
+  var editor2 = ace.edit("editor2");
+  editor2.setOptions({ fontSize: "11pt", maxLines: Infinity });
+  editor2.session.setMode("ace/mode/r");
+  var currentContent = editor2.getValue();
+  editor2.setValue(currentContent.trim(), -1); // -1 sets the cursor at the start
+  
+  var editor3 = ace.edit("editor3");
+  editor3.setOptions({ fontSize: "11pt", maxLines: Infinity });
+  editor3.session.setMode("ace/mode/r");
+  var currentContent = editor3.getValue();
+  editor3.setValue(currentContent.trim(), -1); // -1 sets the cursor at the start
+  
+  var editor4 = ace.edit("editor4");
+  editor4.setOptions({ fontSize: "11pt", maxLines: Infinity });
+  editor4.session.setMode("ace/mode/r");
+  var currentContent = editor4.getValue();
+  editor4.setValue(currentContent.trim(), -1); // -1 sets the cursor at the start
+  
+  var editor5 = ace.edit("editor5");
+  editor5.setOptions({ fontSize: "11pt", maxLines: Infinity });
+  editor5.session.setMode("ace/mode/r");
+  var currentContent = editor5.getValue();
+  editor5.setValue(currentContent.trim(), -1); // -1 sets the cursor at the start
+  
+  // Common function to run R code from either editor
+  async function runR(editorId, outputId) {
+    const webR = await webRPromise; // Ensure WebR is initialized
+    if (!shelter) {
+      shelter = await new webR.Shelter();
+    }
+
+    document.getElementById('canvas').style.display = 'none';
+    let code = ace.edit(editorId).getValue();
+    const result = await shelter.captureR(code, {
+      withAutoprint: true,
+      captureStreams: true,
+      captureConditions: false
+    });
+
+    try {
+      const out = result.output.filter(
+        evt => evt.type == 'stdout' || evt.type == 'stderr'
+      ).map((evt) => evt.data);
+      document.getElementById(outputId).innerText = out.join('\n');
+    } finally {
+      shelter.purge();
+    }
+  }
+
+  // Attach the run functions to buttons
+  document.getElementById('runButton').onclick = () => runR('editor', 'out');
+  document.getElementById('runButton2').onclick = () => runR('editor2', 'out2');
+  document.getElementById('runButton3').onclick = () => runR('editor3', 'out3');
+  document.getElementById('runButton4').onclick = () => runR('editor4', 'out4');
+  document.getElementById('runButton5').onclick = () => runR('editor5', 'out5');
+
+  // Enable buttons after WebR is initialized
+  webRPromise.then(() => {
+    document.getElementById('runButton').disabled = false;
+    document.getElementById('runButton').innerText = 'Run code';
+    document.getElementById('runButton2').disabled = false;
+    document.getElementById('runButton2').innerText = 'Run code';
+    document.getElementById('runButton3').disabled = false;
+    document.getElementById('runButton3').innerText = 'Run code';
+    document.getElementById('runButton4').disabled = false;
+    document.getElementById('runButton4').innerText = 'Run code';
+    document.getElementById('runButton5').disabled = false;
+    document.getElementById('runButton5').innerText = 'Run code';
+  });
+</script><div class="section level3">
+<h3 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h3>
 <p>In this vignette we showcase some uses of the <strong>MAMS</strong>
 package and how to interpret the corresponding R output. The TAILoR
 study <span class="citation">(<a href="#ref-pushpakom2015">Pushpakom et
@@ -94,9 +188,9 @@ scale. The uninteresting treatment effect is chosen as <span class="math inline"
 allows the user to choose whichever parameterization they prefer for
 specifying the effect sizes.</p>
 </div>
-<div class="section level2">
-<h2 id="a-single-stage-design">A single-stage design<a class="anchor" aria-label="anchor" href="#a-single-stage-design"></a>
-</h2>
+<div class="section level3">
+<h3 id="a-single-stage-design">A single-stage design<a class="anchor" aria-label="anchor" href="#a-single-stage-design"></a>
+</h3>
 <p>Designing studies including finding the boundaries of the design and
 the required sample size can be achieved with the function
 <code>mams</code>. The parameters of the function correspond to the
@@ -110,26 +204,26 @@ Dunnett test <span class="citation">(<a href="#ref-dunnett1955">Dunnett
 We use equal allocation between treatment arms, which is specified via
 <code>r=1</code> for the experimental arms and <code>r0=1</code> for
 control.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">MAMS</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2910</span><span class="op">)</span></span>
-<span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/mams.html">mams</a></span><span class="op">(</span>K <span class="op">=</span> <span class="fl">3</span>, J <span class="op">=</span> <span class="fl">1</span>, p <span class="op">=</span> <span class="fl">0.65</span>, p0 <span class="op">=</span> <span class="fl">0.55</span>, r <span class="op">=</span> <span class="fl">1</span>, r0 <span class="op">=</span> <span class="fl">1</span>, alpha <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span></code></pre></div>
-<p>An overview of the design is displayed with <code>print(m1)</code> or
+<button class="btn btn-success btn-sm" disabled type="button" id="runButton">
+Loading webR…
+</button>
+<div id="editor">
+<p>library(MAMS)<br>
+set.seed(2910)<br>
+m1 &lt;- mams(K = 3, J = 1, p = 0.65, p0 = 0.55, r = 1, r0 = 1, alpha =
+0.05, power = 0.9)</p>
+</div>
+<pre><code id="out"></code></pre>
+<canvas id="canvas" width="1000" height="600" style="display: none; margin: auto; width: 700px;"></canvas><p>An overview of the design is displayed with <code>print(m1)</code> or
 <code>summary(m1)</code> or simply <code>m1</code>.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">m1</span></span></code></pre></div>
-<pre><code><span><span class="co">## Design parameters for a 1 stage trial with 3 treatments</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">##                                             Stage 1</span></span>
-<span><span class="co">## Cumulative sample size per stage (control):      79</span></span>
-<span><span class="co">## Cumulative sample size per stage (active):       79</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Maximum total sample size:  316 </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">##              Stage 1</span></span>
-<span><span class="co">## Upper bound:   2.062</span></span>
-<span><span class="co">## Lower bound:   2.062</span></span></code></pre>
-<p>The output produced specifies the number of patients required on
+<button class="btn btn-success btn-sm" disabled type="button" id="runButton2">
+Loading webR...
+</button>
+<div id="editor2">
+<p>m1</p>
+</div>
+<pre><code id="out2"></code></pre>
+<canvas id="canvas" width="1000" height="600" style="display: none; margin: auto; width: 700px;"></canvas><p>The output produced specifies the number of patients required on
 control and each treatment arm as well as the boundaries of the design.
 A total of 316 patients, 79 on control and 79 on each of the 3
 experimental treatments, are required for this study. The null
@@ -138,30 +232,32 @@ statistic is larger than 2.062. The same design can also be specified on
 the scale of traditional effect sizes rather than probabilities, by
 setting <span class="math inline">\(p\)</span> and <span class="math inline">\(p0\)</span> to <span class="math inline">\(NULL\)</span> and specifying values for <span class="math inline">\(delta\)</span>, <span class="math inline">\(delta0\)</span>, and <span class="math inline">\(sd\)</span>. The output will be exactly the same
 as for <code>m1</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">m1d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/mams.html">mams</a></span><span class="op">(</span>K <span class="op">=</span> <span class="fl">3</span>, J <span class="op">=</span> <span class="fl">1</span>, p <span class="op">=</span> <span class="cn">NULL</span>, p0 <span class="op">=</span> <span class="cn">NULL</span>, delta <span class="op">=</span> <span class="fl">0.545</span>, delta0 <span class="op">=</span> <span class="fl">0.178</span>, </span>
-<span>            sd <span class="op">=</span> <span class="fl">1</span>, r <span class="op">=</span> <span class="fl">1</span>, r0 <span class="op">=</span> <span class="fl">1</span>, alpha <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">m1d</span></span></code></pre></div>
-<pre><code><span><span class="co">## Design parameters for a 1 stage trial with 3 treatments</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">##                                             Stage 1</span></span>
-<span><span class="co">## Cumulative sample size per stage (control):      79</span></span>
-<span><span class="co">## Cumulative sample size per stage (active):       79</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Maximum total sample size:  316 </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">##              Stage 1</span></span>
-<span><span class="co">## Upper bound:   2.062</span></span>
-<span><span class="co">## Lower bound:   2.062</span></span></code></pre>
-<p>In the remainder of this section we will specify all effect sizes on
+<button class="btn btn-success btn-sm" disabled type="button" id="runButton3">
+Loading webR...
+</button>
+<div id="editor3">
+<p>m1d &lt;- mams(K = 3, J = 1, p = NULL, p0 = NULL, delta = 0.545,
+delta0 = 0.178, sd = 1, r = 1, r0 = 1, alpha = 0.05, power = 0.9)</p>
+<p>m1d</p>
+</div>
+<pre><code id="out3"></code></pre>
+<canvas id="canvas" width="1000" height="600" style="display: none; margin: auto; width: 700px;"></canvas><p>In the remainder of this section we will specify all effect sizes on
 the probability scale, but converting them is straightforward in R:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">pnorm</a></span><span class="op">(</span><span class="fl">0.545</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 0.6500195</span></span></code></pre>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">qnorm</a></span><span class="op">(</span><span class="fl">0.65</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 0.5449254</span></span></code></pre>
+<button class="btn btn-success btn-sm" disabled type="button" id="runButton4">
+Loading webR...
+</button>
+<div id="editor4">
+<p>pnorm(0.545 / sqrt(2))</p>
+</div>
+<pre><code id="out4"></code></pre>
+<canvas id="canvas" width="1000" height="600" style="display: none; margin: auto; width: 700px;"></canvas><button class="btn btn-success btn-sm" disabled type="button" id="runButton5">
+Loading webR...
+</button>
+<div id="editor5">
+<p>qnorm(0.65) * sqrt(2)</p>
+</div>
+<pre><code id="out5"></code></pre>
+<canvas id="canvas" width="1000" height="600" style="display: none; margin: auto; width: 700px;"></canvas>
 </div>
 <div class="section level2">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
