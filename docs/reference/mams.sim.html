@@ -28,7 +28,7 @@
     <a class="dropdown-item" href="../articles/web_only/reproducibility.html">Reproducibility</a>
     <a class="dropdown-item" href="../articles/web_only/parallelisation.html">Parallelisation</a>
     <h6 class="dropdown-header" data-toc-skip>Design studies</h6>
-    <a class="dropdown-item" href="../articles/ssd_webr/ssd_webr.html">Single stage design</a>
+    <a class="dropdown-item" href="../articles/web_only/single-stage_design.html">Single stage design</a>
     <a class="dropdown-item" href="../articles/web_only/multi-stage_design.html">Multi-stage design</a>
     <a class="dropdown-item" href="../articles/web_only/evaluating_properties.html">Evaluating the properties of a design</a>
     <a class="dropdown-item" href="../articles/web_only/step-down_design.html">A step-down design</a>
@@ -239,7 +239,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> Prop. rejecting hypotheses 1 or 2:                   0.921</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Expected sample size:                              346.540</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1.25    0.03    2.81 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    0.31    0.00    1.85 </span>
 <span class="r-in"><span><span class="co"># parallel = TRUE (default) with default strategy (sequential computation)</span></span></span>
 <span class="r-in"><span><span class="fu">plan</span><span class="op">(</span><span class="va">sequential</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
@@ -255,7 +255,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> Prop. rejecting hypotheses 1 or 2:                   0.921</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Expected sample size:                              346.540</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1.39    0.03    2.81 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    0.21    0.00    1.79 </span>
 <span class="r-in"><span><span class="co"># parallel = TRUE (default) with multisession strategy (parallel computation)</span></span></span>
 <span class="r-in"><span><span class="fu">plan</span><span class="op">(</span><span class="va">multisession</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
@@ -271,7 +271,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> Prop. rejecting hypotheses 1 or 2:                   0.921</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Expected sample size:                              346.540</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1.33    0.06    4.45 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    0.19    0.00    3.97 </span>
 <span class="r-in"><span><span class="fu">plan</span><span class="op">(</span><span class="st">"default"</span><span class="op">)</span>       </span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
