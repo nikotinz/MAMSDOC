@@ -183,9 +183,9 @@ study <span class="citation">(<a href="#ref-pushpakom2015">Pushpakom et
 al. 2015</a>)</span> serves as the motivating example, and so we
 consider a design that evaluates three different experimental treatment
 arms against control, using a one-sided type I error rate of 5% and 90%
-power. The interesting effect size is set to <span class="math inline">\(p = 0.65\)</span>, which corresponds to an effect
-of <span class="math inline">\(δ = 0.545σ\)</span> on the traditional
-scale. The uninteresting treatment effect is chosen as <span class="math inline">\(p_0 = 0.55\)</span> (<span class="math inline">\(δ_0 = 0.178σ\)</span>). <strong>MAMS</strong>
+power. The interesting effect size is set to <span class="math inline">\(\mathrm{p} = 0.65\)</span>, which corresponds to
+an effect of <span class="math inline">\(δ = 0.545σ\)</span> on the
+traditional scale. The uninteresting treatment effect is chosen as <span class="math inline">\(\mathrm{p}_0 = 0.55\)</span> (<span class="math inline">\(δ_0 = 0.178σ\)</span>). <strong>MAMS</strong>
 allows the user to choose whichever parameterization they prefer for
 specifying the effect sizes.</p>
 </div>
@@ -231,8 +231,10 @@ experimental treatments, are required for this study. The null
 hypothesis for treatment k can be rejected if the corresponding test
 statistic is larger than 2.062. The same design can also be specified on
 the scale of traditional effect sizes rather than probabilities, by
-setting <span class="math inline">\(p\)</span> and <span class="math inline">\(p0\)</span> to <span class="math inline">\(NULL\)</span> and specifying values for <span class="math inline">\(delta\)</span>, <span class="math inline">\(delta0\)</span>, and <span class="math inline">\(sd\)</span>. The output will be exactly the same
-as for <code>m1</code>.</p>
+setting <code>p</code> and <code>p0</code> to <code>NULL</code> and
+specifying values for <code>delta</code>, <code>delta0</code>, and
+<code>sd</code>. The output will be exactly the same as for
+<code>m1</code>.</p>
 <button class="btn btn-success btn-sm" disabled type="button" id="runButton3">
 Loading webR...
 </button>
