@@ -47,7 +47,7 @@
     <h6 class="dropdown-header" data-toc-skip>Design studies</h6>
     <a class="dropdown-item" href="../../articles/web_only/single-stage_design.html">Single stage design</a>
     <a class="dropdown-item" href="../../articles/web_only/multi-stage_design.html">Multi-stage design</a>
-    <a class="dropdown-item" href="../../articles/web_only/evaluating_properties.html">Evaluating the properties of a design</a>
+    <a class="dropdown-item" href="../../articles/web_only/evaluating_properties.html">Desing operating charachteristics</a>
     <a class="dropdown-item" href="../../articles/web_only/step-down_design.html">A step-down design</a>
     <a class="dropdown-item" href="../../articles/web_only/unforeseen_design_modifications.html">Unforeseen design modifications</a>
     <a class="dropdown-item" href="../../articles/web_only/non-normal_endpoints.html">Non-normal endpoints</a>
@@ -174,23 +174,26 @@
     document.getElementById('runButton5').disabled = false;
     document.getElementById('runButton5').innerText = 'Run code';
   });
-</script><div class="section level3">
-<h3 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</script><p>In this vignette we showcase some uses of the <strong>MAMS</strong>
+package and how to interpret the corresponding R output.</p>
+<div class="section level3">
+<h3 id="tailor-study">TAILoR Study<a class="anchor" aria-label="anchor" href="#tailor-study"></a>
 </h3>
-<p>In this vignette we showcase some uses of the <strong>MAMS</strong>
-package and how to interpret the corresponding R output. The TAILoR
-study <span class="citation">(<a href="#ref-pushpakom2015">Pushpakom et
-al. 2015</a>)</span> serves as the motivating example, and so we
-consider a design that evaluates three different experimental treatment
-arms against control, using a one-sided type I error rate of 5% and 90%
-power. The interesting effect size is set to <span class="math inline">\(\mathrm{p} = 0.65\)</span>, which corresponds to
-an effect of <span class="math inline">\(δ = 0.545σ\)</span> on the
-traditional scale. The uninteresting treatment effect is chosen as <span class="math inline">\(\mathrm{p}_0 = 0.55\)</span> (<span class="math inline">\(δ_0 = 0.178σ\)</span>). <strong>MAMS</strong>
-allows the user to choose whichever parameterization they prefer for
-specifying the effect sizes.</p>
+<p>The TAILoR study <span class="citation">(<a href="#ref-pushpakom2015">Pushpakom et al. 2015</a>)</span> serves as
+the motivating example, and so we consider a design that evaluates three
+different experimental treatment arms against control, using a one-sided
+type I error rate of 5% and 90% power. The interesting effect size is
+set to <span class="math inline">\(\mathrm{p} = 0.65\)</span>, which
+corresponds to an effect of <span class="math inline">\(δ =
+0.545σ\)</span> on the traditional scale. The uninteresting treatment
+effect is chosen as <span class="math inline">\(\mathrm{p}_0 =
+0.55\)</span> (<span class="math inline">\(δ_0 = 0.178σ\)</span>).
+<strong>MAMS</strong> allows the user to choose whichever
+parameterization they prefer for specifying the effect sizes.</p>
 </div>
 <div class="section level3">
-<h3 id="a-single-stage-design">A single-stage design<a class="anchor" aria-label="anchor" href="#a-single-stage-design"></a>
+<h3 id="mams-function">
+<code>mams()</code> function<a class="anchor" aria-label="anchor" href="#mams-function"></a>
 </h3>
 <p>Designing studies including finding the boundaries of the design and
 the required sample size can be achieved with the function

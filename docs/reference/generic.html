@@ -30,7 +30,7 @@
     <h6 class="dropdown-header" data-toc-skip>Design studies</h6>
     <a class="dropdown-item" href="../articles/web_only/single-stage_design.html">Single stage design</a>
     <a class="dropdown-item" href="../articles/web_only/multi-stage_design.html">Multi-stage design</a>
-    <a class="dropdown-item" href="../articles/web_only/evaluating_properties.html">Evaluating the properties of a design</a>
+    <a class="dropdown-item" href="../articles/web_only/evaluating_properties.html">Desing operating charachteristics</a>
     <a class="dropdown-item" href="../articles/web_only/step-down_design.html">A step-down design</a>
     <a class="dropdown-item" href="../articles/web_only/unforeseen_design_modifications.html">Unforeseen design modifications</a>
     <a class="dropdown-item" href="../articles/web_only/non-normal_endpoints.html">Non-normal endpoints</a>
@@ -241,10 +241,10 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> Simulated error rates based on 10000 simulations</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Prop. rejecting at least 1 hypothesis:               0.926</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Prop. rejecting first hypothesis (Z_1&gt;Z_2,...,Z_K)   0.902</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Prop. rejecting hypotheses 1 or 2 or 4:              0.923</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Expected sample size:                              346.227</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Prop. rejecting at least 1 hypothesis:               0.930</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Prop. rejecting first hypothesis (Z_1&gt;Z_2,...,Z_K)   0.910</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Prop. rejecting hypotheses 1 or 2 or 4:              0.928</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Expected sample size:                              348.058</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># 2-stage 3-treatments versus control design, all promising treatments are selected:</span></span></span>
 <span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="stepdown.mams.html">stepdown.mams</a></span><span class="op">(</span>nMat<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">2</span>, ncol<span class="op">=</span><span class="fl">4</span><span class="op">)</span>, </span></span>
@@ -309,7 +309,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   Stage 1 Stage 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Conditional error    0.01    0.05</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Upper boundary       2.68    2.10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Upper boundary       2.69    2.10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Lower boundary       0.00    2.10</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Design parameters for a 2 stage trial with 3 treatments</span>
@@ -369,7 +369,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   Stage 1 Stage 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Conditional error    0.01    0.05</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Upper boundary       2.68    2.10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Upper boundary       2.69    2.10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Lower boundary       0.00    2.10</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="generic-2.png" alt="" width="700" height="433"></span>

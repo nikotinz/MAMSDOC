@@ -47,7 +47,7 @@
     <h6 class="dropdown-header" data-toc-skip>Design studies</h6>
     <a class="dropdown-item" href="../../articles/web_only/single-stage_design.html">Single stage design</a>
     <a class="dropdown-item" href="../../articles/web_only/multi-stage_design.html">Multi-stage design</a>
-    <a class="dropdown-item" href="../../articles/web_only/evaluating_properties.html">Evaluating the properties of a design</a>
+    <a class="dropdown-item" href="../../articles/web_only/evaluating_properties.html">Desing operating charachteristics</a>
     <a class="dropdown-item" href="../../articles/web_only/step-down_design.html">A step-down design</a>
     <a class="dropdown-item" href="../../articles/web_only/unforeseen_design_modifications.html">Unforeseen design modifications</a>
     <a class="dropdown-item" href="../../articles/web_only/non-normal_endpoints.html">Non-normal endpoints</a>
@@ -83,20 +83,23 @@
 more than 2 stages are seed-dependent (as the Gaussian quadrature
 integration of the multivariate normal distribution relies on
 probabilities estimated by means of the randomised Quasi-Monte-Carlo
-procedure of Genz and Bretz in <code><a href="https://rdrr.io/pkg/mvtnorm/man/pmvnorm.html" class="external-link">mvtnorm::pmvnorm()</a></code>).<br>
-Results are reproducible if a seed is set before the evaluation of a
+procedure of Genz and Bretz in <code><a href="https://rdrr.io/pkg/mvtnorm/man/pmvnorm.html" class="external-link">mvtnorm::pmvnorm()</a></code>).</p>
+<p>Results are reproducible if a seed is set before the evaluation of a
 function of the <strong>MAMS</strong> package (typically by means of the
-function <code>set.seed</code>).<br>
-When <code>parallel=TRUE</code>, the future package assigns independent
-streams of L’Ecuyer pseudo-random numbers to each parallelised task,
-allowing results to be reproducible when a seed is set, even when using
-a different parallelisation strategy and/or a different number of
-workers.<br>
-When <code>parallel=FALSE</code>, the random number generation is
+function <code>set.seed</code>):</p>
+<ul>
+<li>When <code>parallel=TRUE</code>, the future package assigns
+independent streams of L’Ecuyer pseudo-random numbers to each
+parallelised task, allowing results to be reproducible when a seed is
+set, even when using a different parallelisation strategy and/or a
+different number of workers.<br>
+</li>
+<li>When <code>parallel=FALSE</code>, the random number generation is
 handled by base R directly instead of by the future package, so that, if
 the number of stages is larger than 2, evaluations using the same seed
 will not lead to the same exact results with <code>parallel=FALSE</code>
-and <code>parallel=TRUE</code>. ## Example</p>
+and <code>parallel=TRUE</code>.</li>
+</ul>
 <div class="section level3">
 <h3 id="sequential-computation">Sequential computation<a class="anchor" aria-label="anchor" href="#sequential-computation"></a>
 </h3>

@@ -47,7 +47,7 @@
     <h6 class="dropdown-header" data-toc-skip>Design studies</h6>
     <a class="dropdown-item" href="../../articles/web_only/single-stage_design.html">Single stage design</a>
     <a class="dropdown-item" href="../../articles/web_only/multi-stage_design.html">Multi-stage design</a>
-    <a class="dropdown-item" href="../../articles/web_only/evaluating_properties.html">Evaluating the properties of a design</a>
+    <a class="dropdown-item" href="../../articles/web_only/evaluating_properties.html">Desing operating charachteristics</a>
     <a class="dropdown-item" href="../../articles/web_only/step-down_design.html">A step-down design</a>
     <a class="dropdown-item" href="../../articles/web_only/unforeseen_design_modifications.html">Unforeseen design modifications</a>
     <a class="dropdown-item" href="../../articles/web_only/non-normal_endpoints.html">Non-normal endpoints</a>
@@ -82,20 +82,33 @@
 <div class="section level4">
 <h4 id="parallelisation">Parallelisation<a class="anchor" aria-label="anchor" href="#parallelisation"></a>
 </h4>
-<p>Since version 2.0.0, <strong>MAMS</strong> relies on the package
-<strong>future.apply</strong> for parallel computation.<br>
-The package <strong>future.apply</strong> is part of the future
+<ul>
+<li>Since version 2.0.0, <strong>MAMS</strong> relies on the package
+<a href="https://future.apply.futureverse.org" class="external-link">future.apply</a> for parallel computation.<br>
+The package <a href="https://future.apply.futureverse.org" class="external-link">future.apply</a> is part of the future
 parallelisation framework that requires users to define their
 parallelisation strategy by means of the function
 <code><a href="https://future.futureverse.org/reference/plan.html" class="external-link">future::plan()</a></code>.<br>
-This function takes several options like, for example, sequential
-(default strategy corresponding to a computation without
-parallelisation), <code>multicore</code> (using separate forked R
-processes, available to unix/osx users) and <code>multisession</code>
-(using separate R sessions, available to all users). We refer to <span class="citation">(Bengtsson 2021)</span> for an overview of the future
-framework.<br>
-Note that, for the functions of <strong>MAMS</strong> to be available to
-workers defined by <code><a href="https://future.futureverse.org/reference/plan.html" class="external-link">future::plan()</a></code>, <strong>MAMS</strong>
+This function takes several options like, for example:
+<ul>
+<li>
+<code>sequential</code> (default strategy corresponding to a
+computation without parallelisation);<br>
+</li>
+<li>
+<code>multicore</code> (using separate forked R processes, available
+to unix/osx users);<br>
+</li>
+<li>
+<code>multisession</code> (using separate R sessions, available to
+all users). We refer to <span class="citation">(Bengtsson 2021)</span>
+for an overview of the future framework.<br>
+</li>
+</ul>
+</li>
+</ul>
+<p>Note that, for the functions of <strong>MAMS</strong> to be available
+to workers defined by <code><a href="https://future.futureverse.org/reference/plan.html" class="external-link">future::plan()</a></code>, <strong>MAMS</strong>
 has to be installed at a location available under <code>.libPaths</code>
 (by default, R installs packages in the directory corresponding to the
 first element of .libPaths).</p>
