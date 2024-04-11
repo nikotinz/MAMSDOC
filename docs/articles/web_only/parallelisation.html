@@ -53,6 +53,9 @@
     <a class="dropdown-item" href="../../articles/web_only/non-normal_endpoints.html">Non-normal endpoints</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../../news/index.html">Changelog</a>
+</li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../../search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -92,20 +95,32 @@ parallelisation strategy by means of the function
 This function takes several options like, for example:
 <ul>
 <li>
-<code>sequential</code> (default strategy corresponding to a
-computation without parallelisation);<br>
+<code>sequential</code>, default strategy corresponding to a
+computation without parallelisation;<br>
 </li>
 <li>
-<code>multicore</code> (using separate forked R processes, available
-to unix/osx users);<br>
+<code>multicore</code>, using separate forked R processes, available
+to unix/osx users;<br>
 </li>
 <li>
-<code>multisession</code> (using separate R sessions, available to
-all users). We refer to <span class="citation">(Bengtsson 2021)</span>
-for an overview of the future framework.<br>
+<code>multisession</code>, using separate R sessions, available to
+all users.<br>
 </li>
+<li>
+<code>cluster</code>, using separate R sessions on one or more
+machines</li>
 </ul>
 </li>
+</ul>
+<p>We refer to <span class="citation">(Bengtsson 2021)</span> for an
+overview of the future framework.<br></p>
+<p>The performance of each plan varies depending on the operating system
+and computer specifications. On personal computers, our experience
+suggests that</p>
+<ul>
+<li><p><code>cluster</code> is optimal for windows machines,</p></li>
+<li><p><code>multicore</code> is optimal for linux machines,</p></li>
+<li><p><code>multisession</code> is optimal for OSX machines.</p></li>
 </ul>
 <p>Note that, for the functions of <strong>MAMS</strong> to be available
 to workers defined by <code><a href="https://future.futureverse.org/reference/plan.html" class="external-link">future::plan()</a></code>, <strong>MAMS</strong>
@@ -132,7 +147,7 @@ Journal</em> 13 (2): 208. <a href="https://doi.org/10.32614/rj-2021-048" class="
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Thomas Jaki, Dominique-Laurent Couturier, Dominic Magirr, Philip Pallmann.</p>
+<p>Developed by Thomas Jaki, Dominique-Laurent Couturier, Dominic Magirr, Nikita Mozgunov, Philip Pallmann.</p>
 </div>
 
 <div class="pkgdown-footer-right">

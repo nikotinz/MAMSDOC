@@ -53,6 +53,9 @@
     <a class="dropdown-item" href="../../articles/web_only/non-normal_endpoints.html">Non-normal endpoints</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../../news/index.html">Changelog</a>
+</li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../../search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -84,16 +87,16 @@
 to be taken into account. The function <code>new.bounds</code>
 recalculates the boundary values when the sample sizes achieved are not
 as planned in advance. We consider again the two-stage design
-<code>m2</code> where 76 patients were required per stage in the control
-arm and 38 patients per stage for each of the three experimental
-treatment arms. Now assume these requirements could not be met and the
-observed sample sizes at the interim analysis were 75 for control and
-40, 35, and 41 for the experimental treatments. We can recalculate the
-final boundary value with new.bounds in which we specify the interim
-bounds <span class="math inline">\(u = 2.359\)</span> and <span class="math inline">\(l = 0.786\)</span> (as obtained for
+<code>m2</code> studied in the <a href="multi-stage_design.html">Multi-stage design section</a> where 76
+patients were required per stage in the control arm and 38 patients per
+stage for each of the three experimental treatment arms. Now assume
+these requirements could not be met and the observed sample sizes at the
+interim analysis were 75 for control and 40, 35, and 41 for the
+experimental treatments. We can recalculate the final boundary value
+with new.bounds in which we specify the interim bounds <span class="math inline">\(u = 2.359\)</span> and <span class="math inline">\(l = 0.786\)</span> (as obtained for
 <code>m2</code>). The sample sizes as observed at stage 1 and planned
 for stage 2 are given in the <span class="math inline">\(J × (K +
-1)\)</span> matrix <span class="math inline">\(nMat\)</span>.</p>
+1)\)</span> matrix <code>nMat</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m2.nb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/new.bounds.html">new.bounds</a></span><span class="op">(</span>K <span class="op">=</span> <span class="fl">3</span>, J <span class="op">=</span> <span class="fl">2</span>,</span>
 <span> nMat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">75</span>, <span class="fl">152</span>, <span class="fl">40</span>, <span class="fl">76</span>, <span class="fl">35</span>, <span class="fl">76</span>, <span class="fl">41</span>, <span class="fl">76</span><span class="op">)</span>,</span>
@@ -108,35 +111,42 @@ for stage 2 are given in the <span class="math inline">\(J × (K +
 <span><span class="co">## Lower bound:   0.786   2.224</span></span></code></pre>
 <p>We find that as a result of the deviation from the planned sample
 size at the interim analysis, the final boundary value has been lowered
-from 2.225 in the original m2 design to 2.224. The function
+from 2.225 in the original <code>m2</code> design to 2.224. The function
 <code>stepdown.update</code> uses the conditional error approach to
 incorporate unplanned sample size reassessment and/or treatment
 selection (e.g., elimination of treatment arms due to safety issues)
 while maintaining control of the desired FWER. We once again base this
 example on the original three-arm two-stage design but consider the
-step-down version (<code>m2.all</code>) and assume there were some
-unforeseen design changes during the course of the trial. Initially the
-sample sizes at interim were planned to be 76 for the control group and
-38 per active treatment arm. At the interim analysis, we now wish to
-take into account three deviations from the planned study.</p>
+step-down version (<code>m2.all</code>) studied in the <a href="step-down_design.html">Step-down design section</a> and assume
+there were some unforeseen design changes during the course of the
+trial. Initially the sample sizes at interim were planned to be 76 for
+the control group and 38 per active treatment arm. At the interim
+analysis, we now wish to take into account three deviations from the
+planned study.</p>
 <p>Firstly, we want to account for the deviation from the desired sample
 size which, as in the previous example, turned out to be 75 for control
 and 40, 35, and 41 for the experimental treatments, which translates to
-<span class="math inline">\(nobs = c(75, 40, 35,41)\)</span> in the
-function <code>stepdown.update</code>. Secondly, treatment 2 has been
-dropped from the study due to safety, so that only treatment arms 1 and
-3 (<span class="math inline">\(selected.trts = c(1, 3)\)</span>) are to
-be continued.Finally, following a reassessment of the sample size, we
-wish to increase the cumulative sample size at the second stage by 50%
-from 152 to 228 in the control arm and 76 to 114 in the active arms. We
-can specify this using <span class="math inline">\(nfuture =
-matrix(c(228,114, 35, 114), 1, 4)\)</span>.</p>
+<code>nobs = c(75, 40, 35,41)</code> in the function
+<code><a href="../../reference/stepdown.update.html">stepdown.update()</a></code>. Secondly, treatment 2 has been dropped
+from the study due to safety, so that only treatment arms 1 and 3
+(<code>selected.trts = c(1, 3)</code>) are to be continued.Finally,
+following a reassessment of the sample size, we wish to increase the
+cumulative sample size at the second stage by 50% from 152 to 228 in the
+control arm and 76 to 114 in the active arms. We can specify this using
+<code>nfuture = matrix(c(228,114, 35, 114), 1, 4)</code>.</p>
 <p>Notice that since treatment arm 2 has already been abandoned, no
 additional patients are recruited beyond the 35 already in the study.
-Further supposing the interim evaluation yielded Z statistics of <span class="math inline">\(zscores = c(1.1, 0.9, 0.9)\)</span>, we can
-calculate the modified design.</p>
-<p>The output of <code>m2.update</code> we summarize it in Table 3
-(column “Updated”). The boundaries for the elementary hypothesis <span class="math inline">\(H_1\)</span> and <span class="math inline">\(H_3\)</span> have been slightly increased to
+Further supposing the interim evaluation yielded Z statistics of
+<code>zscores = c(1.1, 0.9, 0.9)</code>, we can calculate the modified
+design.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">m2.update</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/stepdown.update.html">stepdown.update</a></span><span class="op">(</span>current.mams <span class="op">=</span> <span class="va">m2.all</span>,</span>
+<span>nobs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">75</span>, <span class="fl">40</span>, <span class="fl">35</span>, <span class="fl">41</span><span class="op">)</span>, zscores <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.1</span>, <span class="fl">0.9</span>, <span class="fl">0.9</span><span class="op">)</span>,</span>
+<span>selected.trts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, nfuture <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">228</span>, <span class="fl">114</span>, <span class="fl">35</span>, <span class="fl">114</span><span class="op">)</span>,</span>
+<span>nrow <span class="op">=</span> <span class="fl">1</span>, ncol <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>We summarise in Table 3 (column “Updated”) the output of
+<code>m2.update</code>. The boundaries for the elementary hypothesis
+<span class="math inline">\(H_1\)</span> and <span class="math inline">\(H_3\)</span> have been slightly increased to
 account for the change in sample size while the boundary for <span class="math inline">\(H_2\)</span> has been slightly decreased.
 Similarly, the boundary for the intersection hypothesis involving only
 the remaining treatments (<span class="math inline">\(H_{13}\)</span>)
@@ -201,7 +211,7 @@ increased.</p>
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Thomas Jaki, Dominique-Laurent Couturier, Dominic Magirr, Philip Pallmann.</p>
+<p>Developed by Thomas Jaki, Dominique-Laurent Couturier, Dominic Magirr, Nikita Mozgunov, Philip Pallmann.</p>
 </div>
 
 <div class="pkgdown-footer-right">

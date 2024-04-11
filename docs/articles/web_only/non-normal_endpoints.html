@@ -53,6 +53,9 @@
     <a class="dropdown-item" href="../../articles/web_only/non-normal_endpoints.html">Non-normal endpoints</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../../news/index.html">Changelog</a>
+</li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../../search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -79,11 +82,11 @@
 
     
     
-<p>Up to this point we have focused on normally distributed endpoints.
-Based on asymptotic theory, MAMS can also handle non-normal endpoints by
-exploiting the asymptotic properties of efficient score statistics (Jaki
-and Magirr 2013), as we will demonstrate for ordinal, binary, and
-time-to-event outcome data.</p>
+<p>In previuos sections we have focused on normally distributed
+endpoints. Based on asymptotic theory, MAMS can also handle non-normal
+endpoints by exploiting the asymptotic properties of efficient score
+statistics (Jaki and Magirr 2013), as we will demonstrate for ordinal,
+binary, and time-to-event outcome data.</p>
 <div class="section level3">
 <h3 id="ordinal-and-binary-endpoints">Ordinal and binary endpoints<a class="anchor" aria-label="anchor" href="#ordinal-and-binary-endpoints"></a>
 </h3>
@@ -108,10 +111,10 @@ interesting effect on the log-OR scale, i.e., a log-OR of 0.28 or an OR
 of 1.32.</p>
 <p>To find the boundary values and sample sizes, we can use the function
 <code>ordinal.mams</code>, which is a wrapper for <code>mams</code> with
-additional inputs <span class="math inline">\(prob\)</span> for the
-probabilities of falling into each category (which must sum up to one),
-as well as <span class="math inline">\(or\)</span> and <span class="math inline">\(or0\)</span> for the interesting and uninteresting
-treatment effects, respectively, on the OR scale:</p>
+additional inputs <code>prob</code> for the probabilities of falling
+into each category (which must sum up to one), as well as
+<code>or</code> and <code>or0</code> for the interesting and
+uninteresting treatment effects, respectively, on the OR scale:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">prob</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.075</span>, <span class="fl">0.182</span>, <span class="fl">0.319</span>, <span class="fl">0.243</span>, <span class="fl">0.015</span>, <span class="fl">0.166</span><span class="op">)</span></span>
 <span><span class="va">mord</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/ordinal.mams.html">ordinal.mams</a></span><span class="op">(</span>prob <span class="op">=</span> <span class="va">prob</span>, or <span class="op">=</span> <span class="fl">3.06</span>, or0 <span class="op">=</span> <span class="fl">1.32</span>, K <span class="op">=</span> <span class="fl">3</span>, J <span class="op">=</span> <span class="fl">2</span>,</span>
@@ -158,8 +161,9 @@ to half of the total number of events in that arm. Our interesting
 effect size is a HR of 1.5, corresponding to a log-HR of 0.405, and the
 uninteresting effect size is a HR of 1.1, i.e., a log-HR of 0.095.</p>
 <p>We can calculate the boundary values and sample sizes with the
-function tite.mams, which is another wrapper for mams with additional
-inputs hr and hr0 for the interesting and uninteresting treatment
+function <code>tite.mams</code>, which is another wrapper for
+<code><a href="../../reference/mams.html">mams()</a></code> with additional inputs <code>hr</code> and
+<code>hr0</code> for the interesting and uninteresting treatment
 effects, respectively, on the HR scale:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mtite</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tite.mams.html">tite.mams</a></span><span class="op">(</span>hr <span class="op">=</span> <span class="fl">1.5</span>, hr0 <span class="op">=</span> <span class="fl">1.1</span>, K <span class="op">=</span> <span class="fl">3</span>, J <span class="op">=</span> <span class="fl">2</span>, alpha <span class="op">=</span> <span class="fl">0.05</span>,</span>
@@ -218,7 +222,7 @@ Endpoint.”</span> <em>Statistics in Medicine</em> 28 (5): 828–47. <a href="h
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Thomas Jaki, Dominique-Laurent Couturier, Dominic Magirr, Philip Pallmann.</p>
+<p>Developed by Thomas Jaki, Dominique-Laurent Couturier, Dominic Magirr, Nikita Mozgunov, Philip Pallmann.</p>
 </div>
 
 <div class="pkgdown-footer-right">

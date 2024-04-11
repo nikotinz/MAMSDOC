@@ -53,6 +53,9 @@
     <a class="dropdown-item" href="../../articles/web_only/non-normal_endpoints.html">Non-normal endpoints</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../../news/index.html">Changelog</a>
+</li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../../search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -91,16 +94,21 @@ non-binding. The step-down procedure makes use of closed testing, as
 described in Section 2.2 <span class="citation">(<a href="#ref-jaki2019">Jaki, Pallmann, and Magirr 2019</a>)</span> and
 <span class="citation">(<a href="#ref-magirr2014">Magirr, Stallard, and
 Jaki 2014</a>)</span>.<br></p>
-<p>We reuse the three-arm two-stage design <code>m2</code> with 76 and
-38 observations in stage 1 and cumulative sample sizes at stage two of
-152 and 76 on control and active treatments, respectively. The sample
-size of the study can be specified through the matrix <span class="math inline">\(nMat\)</span> that has <span class="math inline">\(J\)</span> rows and <span class="math inline">\(K\)</span> columns where the first column contains
-the values for the control group. A lower boundary can be set via <span class="math inline">\(lb\)</span>, and we set it to <span class="math inline">\(0.786\)</span> as in the original design. We can
+<p>We reuse the three-arm two-stage design <code>m2</code>, studied in
+the <a href="multi-stage_design.html">Multi-stage design section</a>
+with 76 and 38 observations in stage 1 and cumulative sample sizes at
+stage two of 152 and 76 on control and active treatments, respectively.
+The sample size of the study can be specified through the matrix
+<code>nMat</code> that has <span class="math inline">\(J\)</span> rows
+and <span class="math inline">\(K\)</span> columns where the first
+column contains the values for the control group. A lower boundary can
+be set via <code>lb</code>, and we set it to <span class="math inline">\(0.786\)</span> as in the original design. We can
 then choose how much of the total family-wise error we want to spend at
-each stage using the argument <span class="math inline">\(alpha.star\)</span>, and we choose to spend, in
-line with the triangular test, <span class="math inline">\(\alpha^*_1 =
-0.026\)</span> $ at the first interim analysis, with the remaining <span class="math inline">\(α\)</span> level being used at the second
-analysis. We compare the selection rules <span class="math inline">\(all.promising\)</span> and <span class="math inline">\(select.best\)</span>:</p>
+each stage using the argument <code>alpha.star</code>, and we choose to
+spend, in line with the triangular test, <span class="math inline">\(\alpha^*_1 = 0.026\)</span> $ the first interim
+analysis, with the remaining <span class="math inline">\(α\)</span>
+level being used at the second analysis. We compare the selection rules
+<code>all.promising</code> and <code>select.best</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m2.all</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/stepdown.mams.html">stepdown.mams</a></span><span class="op">(</span>nMat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">76</span>, <span class="fl">152</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">38</span>, <span class="fl">76</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span>
 <span> nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>, lb <span class="op">=</span> <span class="va">m2</span><span class="op">$</span><span class="va">l</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, alpha.star <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.026</span>, <span class="fl">0.05</span><span class="op">)</span>,</span>
@@ -109,8 +117,8 @@ analysis. We compare the selection rules <span class="math inline">\(all.promisi
 <span><span class="va">m2.best</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/stepdown.mams.html">stepdown.mams</a></span><span class="op">(</span>nMat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">76</span>, <span class="fl">152</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">38</span>, <span class="fl">76</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>, lb <span class="op">=</span> <span class="va">m2</span><span class="op">$</span><span class="va">l</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, alpha.star <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.026</span>, <span class="fl">0.05</span><span class="op">)</span>,</span>
 <span>selection <span class="op">=</span> <span class="st">"select.best"</span><span class="op">)</span></span></code></pre></div>
-<p>The output for all intersections and stages is verbose, therefore we
-summarizes only the upper boundary values in Table.</p>
+<p>The following table reports the upper boundary values for selected
+scenarios.</p>
 <table style="width:100%;" class="table">
 <colgroup>
 <col width="41%">
@@ -149,10 +157,6 @@ summarizes only the upper boundary values in Table.</p>
 </tr>
 </tbody>
 </table>
-<p>Upper boundaries for the elementary (H1, H2, H3), intersection (H12,
-H13, H23), and global (H123) hypotheses of a three-arm two-stage
-step-down design involving selection of either the single best or all
-promising treatments at interim.</p>
 <p>One can see that the option to proceed with more than one promising
 treatment comes at the cost of higher stopping boundaries for the
 intersection hypotheses at stage 2. So in order to reject the global
@@ -196,7 +200,7 @@ Phase III Clinical Trials Incorporating Treatment Selection.”</span>
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Thomas Jaki, Dominique-Laurent Couturier, Dominic Magirr, Philip Pallmann.</p>
+<p>Developed by Thomas Jaki, Dominique-Laurent Couturier, Dominic Magirr, Nikita Mozgunov, Philip Pallmann.</p>
 </div>
 
 <div class="pkgdown-footer-right">
