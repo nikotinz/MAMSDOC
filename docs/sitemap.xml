@@ -1,75 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/web_only/evaluating_properties.html</loc>
-  </url>
-  <url>
-    <loc>/articles/web_only/multi-stage_design.html</loc>
-  </url>
-  <url>
-    <loc>/articles/web_only/non-normal_endpoints.html</loc>
-  </url>
-  <url>
-    <loc>/articles/web_only/parallelisation.html</loc>
-  </url>
-  <url>
-    <loc>/articles/web_only/reproducibility.html</loc>
-  </url>
-  <url>
-    <loc>/articles/web_only/single-stage_design.html</loc>
-  </url>
-  <url>
-    <loc>/articles/web_only/step-down_design.html</loc>
-  </url>
-  <url>
-    <loc>/articles/web_only/unforeseen_design_modifications.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/generic.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/MAMS-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mams.html</loc>
-  </url>
-  <url>
-    <loc>/reference/MAMS.News.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mams.sim.html</loc>
-  </url>
-  <url>
-    <loc>/reference/new.bounds.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ordinal.mams.html</loc>
-  </url>
-  <url>
-    <loc>/reference/stepdown.mams.html</loc>
-  </url>
-  <url>
-    <loc>/reference/stepdown.update.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tite.mams.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/web_only/evaluating_properties.html</loc></url>
+<url><loc>/articles/web_only/multi-stage_design.html</loc></url>
+<url><loc>/articles/web_only/non-normal_endpoints.html</loc></url>
+<url><loc>/articles/web_only/parallelisation.html</loc></url>
+<url><loc>/articles/web_only/reproducibility.html</loc></url>
+<url><loc>/articles/web_only/single-stage_design.html</loc></url>
+<url><loc>/articles/web_only/step-down_design.html</loc></url>
+<url><loc>/articles/web_only/unforeseen_design_modifications.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/dot-onAttach.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/MAMS.html</loc></url>
+<url><loc>/reference/mams.sim.html</loc></url>
+<url><loc>/reference/MAMSNews.html</loc></url>
+<url><loc>/reference/new.bounds.html</loc></url>
+<url><loc>/reference/ordinal.mams.html</loc></url>
+<url><loc>/reference/plot.MAMS.html</loc></url>
+<url><loc>/reference/plot.MAMS.stepdown.html</loc></url>
+<url><loc>/reference/print.MAMS.html</loc></url>
+<url><loc>/reference/print.MAMS.stepdown.html</loc></url>
+<url><loc>/reference/stepdown.mams.html</loc></url>
+<url><loc>/reference/stepdown.update.html</loc></url>
+<url><loc>/reference/summary.MAMS.html</loc></url>
+<url><loc>/reference/summary.MAMS.stepdown.html</loc></url>
+<url><loc>/reference/tite.mams.html</loc></url>
 </urlset>
+

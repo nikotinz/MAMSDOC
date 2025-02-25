@@ -1,14 +1,13 @@
-pandoc: 3.1.11
-pkgdown: 2.0.7
+pandoc: 3.1.9
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
-  evaluating_properties: web_only/evaluating_properties.html
-  multi-stage_design: web_only/multi-stage_design.html
-  non-normal_endpoints: web_only/non-normal_endpoints.html
-  parallelisation: web_only/parallelisation.html
-  reproducibility: web_only/reproducibility.html
-  single-stage_design: web_only/single-stage_design.html
-  step-down_design: web_only/step-down_design.html
-  unforeseen_design_modifications: web_only/unforeseen_design_modifications.html
-last_built: 2024-04-11T12:55Z
-
+  web_only/evaluating_properties: web_only/evaluating_properties.html
+  web_only/multi-stage_design: web_only/multi-stage_design.html
+  web_only/non-normal_endpoints: web_only/non-normal_endpoints.html
+  web_only/parallelisation: web_only/parallelisation.html
+  web_only/reproducibility: web_only/reproducibility.html
+  web_only/single-stage_design: web_only/single-stage_design.html
+  web_only/step-down_design: web_only/step-down_design.html
+  web_only/unforeseen_design_modifications: web_only/unforeseen_design_modifications.html
+last_built: 2025-02-25T20:55Z

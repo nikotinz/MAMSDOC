@@ -5,7 +5,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="MAMS">
 <title>A step-down design • MAMS</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
@@ -15,63 +14,52 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../../apple-touch-icon-60x60.png">
 <script src="../../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../../pkgdown.js"></script><meta property="og:title" content="A step-down design">
-<meta property="og:description" content="MAMS">
-<meta property="og:image" content="/logo.png">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<script src="../../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../../deps/headroom-0.11.0/headroom.min.js"></script><script src="../../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../../deps/search-1.0.0/fuse.min.js"></script><script src="../../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../../pkgdown.js"></script><meta property="og:title" content="A step-down design">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../../index.html">MAMS</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">3.0.0</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="../../reference/index.html">Reference</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../../reference/index.html">Reference</a></li>
 <li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-tutorials">Tutorials</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-tutorials">
-    <h6 class="dropdown-header" data-toc-skip>Basics</h6>
-    <a class="dropdown-item" href="../../articles/web_only/reproducibility.html">Reproducibility</a>
-    <a class="dropdown-item" href="../../articles/web_only/parallelisation.html">Parallelisation</a>
-    <h6 class="dropdown-header" data-toc-skip>Design studies</h6>
-    <a class="dropdown-item" href="../../articles/web_only/single-stage_design.html">Single stage design</a>
-    <a class="dropdown-item" href="../../articles/web_only/multi-stage_design.html">Multi-stage design</a>
-    <a class="dropdown-item" href="../../articles/web_only/evaluating_properties.html">Desing operating charachteristics</a>
-    <a class="dropdown-item" href="../../articles/web_only/step-down_design.html">A step-down design</a>
-    <a class="dropdown-item" href="../../articles/web_only/unforeseen_design_modifications.html">Unforeseen design modifications</a>
-    <a class="dropdown-item" href="../../articles/web_only/non-normal_endpoints.html">Non-normal endpoints</a>
-  </div>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../../news/index.html">Changelog</a>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-tutorials" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Tutorials</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-tutorials">
+<li><h6 class="dropdown-header" data-toc-skip>Basics</h6></li>
+    <li><a class="dropdown-item" href="../../articles/web_only/reproducibility.html">Reproducibility</a></li>
+    <li><a class="dropdown-item" href="../../articles/web_only/parallelisation.html">Parallelisation</a></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Design studies</h6></li>
+    <li><a class="dropdown-item" href="../../articles/web_only/single-stage_design.html">Single stage design</a></li>
+    <li><a class="dropdown-item" href="../../articles/web_only/multi-stage_design.html">Multi-stage design</a></li>
+    <li><a class="dropdown-item" href="../../articles/web_only/evaluating_properties.html">Design operating characteristics</a></li>
+    <li><a class="dropdown-item" href="../../articles/web_only/step-down_design.html">A step-down design</a></li>
+    <li><a class="dropdown-item" href="../../articles/web_only/unforeseen_design_modifications.html">Unforeseen design modifications</a></li>
+    <li><a class="dropdown-item" href="../../articles/web_only/non-normal_endpoints.html">Non-normal endpoints</a></li>
+  </ul>
 </li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../../search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav"></ul>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../../search.json">
+</form></li>
+      </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-article">
 
@@ -80,10 +68,11 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../../logo.png" class="logo" alt=""><h1>A step-down design</h1>
+
+      <h1>A step-down design</h1>
             
       
-      
+
       <div class="d-none name"><code>step-down_design.Rmd</code></div>
     </div>
 
@@ -106,14 +95,20 @@ the <a href="multi-stage_design.html">Multi-stage design section</a>
 with 76 and 38 observations in stage 1 and cumulative sample sizes at
 stage two of 152 and 76 on control and active treatments, respectively.
 The sample size of the study can be specified through the matrix
-<code>nMat</code> that has <span class="math inline">\(J\)</span> rows
-and <span class="math inline">\(K\)</span> columns where the first
-column contains the values for the control group. A lower boundary can
-be set via <code>lb</code>, and we set it to <span class="math inline">\(0.786\)</span> as in the original design. We can
-then choose how much of the total family-wise error we want to spend at
-each stage using the argument <code>alpha.star</code>, and we choose to
-spend, in line with the triangular test, <span class="math inline">\(\alpha^*_1 = 0.026\)</span> $ the first interim
-analysis, with the remaining <span class="math inline">\(α\)</span>
+<code>nMat</code> that has
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>J</mi><annotation encoding="application/x-tex">J</annotation></semantics></math>
+rows and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>
+columns where the first column contains the values for the control
+group. A lower boundary can be set via <code>lb</code>, and we set it to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0.786</mn><annotation encoding="application/x-tex">0.786</annotation></semantics></math>
+as in the original design. We can then choose how much of the total
+family-wise error we want to spend at each stage using the argument
+<code>alpha.star</code>, and we choose to spend, in line with the
+triangular test,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>α</mi><mn>1</mn><mo>*</mo></msubsup><mo>=</mo><mn>0.026</mn></mrow><annotation encoding="application/x-tex">\alpha^*_1 = 0.026</annotation></semantics></math>
+$ the first interim analysis, with the remaining
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">α</annotation></semantics></math>
 level being used at the second analysis. We compare the selection rules
 <code>all.promising</code> and <code>select.best</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -142,7 +137,7 @@ scenarios.</p>
 <tbody>
 <tr class="odd">
 <td>
-<span class="math inline">\(H_1\)</span>,<span class="math inline">\(H_2\)</span>,<span class="math inline">\(H_3\)</span>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>H</mi><mn>1</mn></msub><annotation encoding="application/x-tex">H_1</annotation></semantics></math>,<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>H</mi><mn>2</mn></msub><annotation encoding="application/x-tex">H_2</annotation></semantics></math>,<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>H</mi><mn>3</mn></msub><annotation encoding="application/x-tex">H_3</annotation></semantics></math>
 </td>
 <td align="center">1.94</td>
 <td align="center">1.71</td>
@@ -150,14 +145,14 @@ scenarios.</p>
 </tr>
 <tr class="even">
 <td>
-<span class="math inline">\(H_{12}\)</span>,<span class="math inline">\(H_{13}\)</span>,<span class="math inline">\(H_{23}\)</span>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>H</mi><mn>12</mn></msub><annotation encoding="application/x-tex">H_{12}</annotation></semantics></math>,<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>H</mi><mn>13</mn></msub><annotation encoding="application/x-tex">H_{13}</annotation></semantics></math>,<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>H</mi><mn>23</mn></msub><annotation encoding="application/x-tex">H_{23}</annotation></semantics></math>
 </td>
 <td align="center">2.21</td>
 <td align="center">2.02</td>
 <td align="center">2.06</td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(H_{123}\)</span></td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>H</mi><mn>123</mn></msub><annotation encoding="application/x-tex">H_{123}</annotation></semantics></math></td>
 <td align="center">2.36</td>
 <td align="center">2.17</td>
 <td align="center">2.22</td>
@@ -174,11 +169,11 @@ elementary hypotheses H1, H2, and H3 as well as for the intersection
 hypotheses H12, H13, and H23 because the sample sizes were chosen to be
 equal in all active treatment arms. A graphical display of the stopping
 boundaries using the plot function is shown in Figure.</p>
-<p><img src="step-down_design_plot.png"><br>
+<p><img src="step-down_design_plot.png" alt="Stopping boundaries plot"><br>
 Figure: Stopping boundaries for a three-arm two-stage step-down design
 with selection of all promising treatments at interim (left) or just the
 single best treatment (right).</p>
-<div class="section level2">
+<div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
@@ -206,21 +201,19 @@ Phase III Clinical Trials Incorporating Treatment Selection.”</span>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p>
-<p>Developed by Thomas Jaki, Dominique-Laurent Couturier, Dominic Magirr, Nikita Mozgunov, Philip Pallmann.</p>
+  <p>Developed by Thomas Jaki, Dominique-Laurent Couturier, Dominic Magirr, Nikita Mozgunov, Philip Pallmann.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>
