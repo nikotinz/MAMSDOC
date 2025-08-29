@@ -1,0 +1,131 @@
+---
+title: "Non-normal endpoints"
+output: rmarkdown::html_vignette
+link-citations: yes
+bibliography: references.bib
+vignette: >
+  %\VignetteIndexEntry{Non-normal endpoints}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(MAMS)
+
+```
+
+In previous sections we have focused on normally distributed endpoints.
+Based on asymptotic theory, MAMS can also handle non-normal endpoints by
+exploiting the asymptotic properties of efficient score statistics (Jaki
+and Magirr 2013), as we will demonstrate for ordinal, binary, and
+time-to-event outcome data.
+
+## Ordinal and binary endpoints
+
+Ordinal data consist of multiple different categories that have a
+natural order, which is common for quality-of-life scores, pain scores,
+and similar questionnaire-based outcomes. Our illustration here is
+motivated by the ASCLEPIOS study [@whitehead1993] and its example
+analyses in [@whitehead2008] and [@jaki2012].
+
+We design a **MAMS** trial with three experimental treatments and a
+control arm, one interim analysis after half the patients have provided
+an outcome measure, and triangular boundaries in a setting with an
+ordinal primary endpoint, under the assumption of proportional odds. We
+expect that under control conditions the probabilities of falling into
+each of six categories, ordered from best to worst, are 0.075, 0.182,
+0.319, 0.243, 0.015, and 0.166. Suppose the interesting effect is a
+doubling in the probability of falling into one of the two best
+categories combined, from 25.7 to 51.4%, for any experimental arm. This
+corresponds to an odds ratio (OR) of 3.06 and a log-OR of 1.12. The
+uninteresting effect shall be one quarter of the interesting effect on
+the log-OR scale, i.e., a log-OR of 0.28 or an OR of 1.32.
+
+To find the boundary values and sample sizes, we can use the function
+`ordinal.mams`, which is a wrapper for `mams` with additional inputs
+`prob` for the probabilities of falling into each category (which must
+sum up to one), as well as `or` and `or0` for the interesting and
+uninteresting treatment effects, respectively, on the OR scale:
+
+```{r eval=TRUE, include=FALSE}
+prob <- c(0.075, 0.182, 0.319, 0.243, 0.015, 0.166)
+mord <- ordinal.mams(prob = prob, or = 3.06, or0 = 1.32, K = 3, J = 2,
+alpha = 0.05, power = 0.9, r = 1:2, r0 = 1:2, ushape = "triangular",
+lshape = "triangular")
+```
+
+```{r eval=FALSE, include=TRUE}
+prob <- c(0.075, 0.182, 0.319, 0.243, 0.015, 0.166)
+mord <- ordinal.mams(prob = prob, or = 3.06, or0 = 1.32, K = 3, J = 2,
+alpha = 0.05, power = 0.9, r = 1:2, r0 = 1:2, ushape = "triangular",
+lshape = "triangular")
+
+mord
+```
+
+```{r echo=FALSE}
+mord
+```
+
+The function `ordinal.mams` can also be used for binary endpoints as
+they are a simple special case of ordinal data where $prob$ has only two
+categories (success/failure, yes/no, etc.) and the proportional odds
+assumption becomes obsolete.
+
+## Time-to-event endpoints
+
+Another useful extension of **MAMS** is to event-time outcomes, e.g.,
+when the primary endpoint is survival. In that case the effect sizes $δ$
+and $δ_0$ must be specified in terms of log-hazard ratios (log-HRs),
+which are assumed to be asymptotically normal, and the standard
+deviation is $σ = 1$. Sample sizes are expressed in terms of events
+(e.g., deaths), $e$, rather than numbers of patients, $n$. As a
+consequence, we set $r^{(1)}_k = 1$ and
+$r^{(j)}_k = e^{(j)}_0 / e^{(1)}_0$. The underlying approximation should
+work well if the effect size is small, the number of allocated patients
+per arm is equal at each stage, and there are few ties in relation to
+the number of different event times.
+
+Assume we want to design a **MAMS** trial with three experimental
+treatment arms and a control, using triangular boundaries. One interim
+analysis is to be conducted upon observing $e^{(1)}_0$ events in the
+control arm, set to half of the total number of events in that arm. Our
+interesting effect size is a HR of 1.5, corresponding to a log-HR of
+0.405, and the uninteresting effect size is a HR of 1.1, i.e., a log-HR
+of 0.095.
+
+We can calculate the boundary values and sample sizes with the function
+`tite.mams`, which is another wrapper for `mams()` with additional inputs `hr`
+and `hr0` for the interesting and uninteresting treatment effects,
+respectively, on the HR scale:
+
+```{r eval=TRUE, include=FALSE}
+mtite <- tite.mams(hr = 1.5, hr0 = 1.1, K = 3, J = 2, alpha = 0.05,
+ power = 0.9, r = 1:2, r0 = 1:2, ushape = "triangular",
+ lshape = "triangular")
+
+```
+
+```{r eval=FALSE, include=TRUE}
+mtite <- tite.mams(hr = 1.5, hr0 = 1.1, K = 3, J = 2, alpha = 0.05,
+ power = 0.9, r = 1:2, r0 = 1:2, ushape = "triangular",
+ lshape = "triangular")
+
+mtite
+```
+
+```{r echo=FALSE}
+mtite
+```
+
+The sample size output here is given as the required number of events,
+which is obviously smaller than the required number of patients. We
+refer to [@whitehead2001] for guidance how to estimate the maximum total
+number of patients to be recruited.
+
+## References

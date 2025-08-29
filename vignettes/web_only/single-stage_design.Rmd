@@ -1,0 +1,261 @@
+---
+title: "Single-stage design"
+output: rmarkdown::html_vignette
+link-citations: yes
+bibliography: references.bib
+vignette: >
+  %\VignetteIndexEntry{Single-stage design}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{=html}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.4/ace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.4/mode-r.min.js"></script>
+<script type="module">
+  import { WebR } from 'https://webr.r-wasm.org/latest/webr.mjs';
+  
+  // Initialize shared WebR environment
+  async function initWebR() {
+    const webR = new WebR();
+    await webR.init();
+    await webR.evalRVoid(`{webr::install('MAMS')}`);
+    await webR.evalRVoid(`{library(MAMS)}`);
+    await webR.evalRVoid('options(device=function(...){webr::canvas(width=500, height=300)})');
+    return webR;
+  }
+
+  const webRPromise = initWebR(); // This promise will resolve with the initialized WebR object
+
+  // Define a shared shelter object
+  let shelter;
+
+  // Initialize editors
+  var editor = ace.edit("editor");
+  editor.setOptions({ fontSize: "11pt", maxLines: Infinity });
+  editor.session.setMode("ace/mode/r");
+  editor.setShowPrintMargin(true);
+  var currentContent = editor.getValue();
+  editor.setValue(currentContent.trim(), -1); // -1 sets the cursor at the start
+  
+  var editor2 = ace.edit("editor2");
+  editor2.setOptions({ fontSize: "11pt", maxLines: Infinity });
+  editor2.session.setMode("ace/mode/r");
+  var currentContent = editor2.getValue();
+  editor2.setValue(currentContent.trim(), -1); // -1 sets the cursor at the start
+  
+  var editor3 = ace.edit("editor3");
+  editor3.setOptions({ fontSize: "11pt", maxLines: Infinity });
+  editor3.session.setMode("ace/mode/r");
+  var currentContent = editor3.getValue();
+  editor3.setValue(currentContent.trim(), -1); // -1 sets the cursor at the start
+  
+  var editor4 = ace.edit("editor4");
+  editor4.setOptions({ fontSize: "11pt", maxLines: Infinity });
+  editor4.session.setMode("ace/mode/r");
+  var currentContent = editor4.getValue();
+  editor4.setValue(currentContent.trim(), -1); // -1 sets the cursor at the start
+  
+  var editor5 = ace.edit("editor5");
+  editor5.setOptions({ fontSize: "11pt", maxLines: Infinity });
+  editor5.session.setMode("ace/mode/r");
+  var currentContent = editor5.getValue();
+  editor5.setValue(currentContent.trim(), -1); // -1 sets the cursor at the start
+  
+  // Common function to run R code from either editor
+  async function runR(editorId, outputId) {
+    const webR = await webRPromise; // Ensure WebR is initialized
+    if (!shelter) {
+      shelter = await new webR.Shelter();
+    }
+
+    document.getElementById('canvas').style.display = 'none';
+    let code = ace.edit(editorId).getValue();
+    const result = await shelter.captureR(code, {
+      withAutoprint: true,
+      captureStreams: true,
+      captureConditions: false
+    });
+
+    try {
+      const out = result.output.filter(
+        evt => evt.type == 'stdout' || evt.type == 'stderr'
+      ).map((evt) => evt.data);
+      document.getElementById(outputId).innerText = out.join('\n');
+    } finally {
+      shelter.purge();
+    }
+  }
+
+  // Attach the run functions to buttons
+  document.getElementById('runButton').onclick = () => runR('editor', 'out');
+  document.getElementById('runButton2').onclick = () => runR('editor2', 'out2');
+  document.getElementById('runButton3').onclick = () => runR('editor3', 'out3');
+  document.getElementById('runButton4').onclick = () => runR('editor4', 'out4');
+  document.getElementById('runButton5').onclick = () => runR('editor5', 'out5');
+
+  // Enable buttons after WebR is initialized
+  webRPromise.then(() => {
+    document.getElementById('runButton').disabled = false;
+    document.getElementById('runButton').innerText = 'Run code';
+    document.getElementById('runButton2').disabled = false;
+    document.getElementById('runButton2').innerText = 'Run code';
+    document.getElementById('runButton3').disabled = false;
+    document.getElementById('runButton3').innerText = 'Run code';
+    document.getElementById('runButton4').disabled = false;
+    document.getElementById('runButton4').innerText = 'Run code';
+    document.getElementById('runButton5').disabled = false;
+    document.getElementById('runButton5').innerText = 'Run code';
+  });
+</script>
+```
+
+In this vignette we showcase some uses of the **MAMS** package and how
+to interpret the corresponding R output.  
+
+## TAILoR Study
+
+ The TAILoR study
+[@pushpakom2015] serves as the motivating example, and so we consider a
+design that evaluates three different experimental treatment arms
+against control, using a one-sided type I error rate of 5% and 90%
+power. The interesting effect size is set to $\mathrm{p} = 0.65$, which
+corresponds to an effect of $δ = 0.545σ$ on the traditional scale. The
+uninteresting treatment effect is chosen as $\mathrm{p}_0 = 0.55$
+($δ_0 = 0.178σ$). **MAMS** allows the user to choose whichever
+parameterization they prefer for specifying the effect sizes.
+
+## `mams()` function
+
+Designing studies including finding the boundaries of the design and the
+required sample size can be achieved with the function `mams`. The
+parameters of the function correspond to the definition in Section 2
+[@jaki2019] so that `K`, e.g., specifies the number of experimental
+treatments that are to be compared to control, and `J` the number of
+stages. We begin by considering a single-stage design (`J = 1`), which
+corresponds to a design based on a standard Dunnett test [@dunnett1955]
+involving `K = 3` experimental treatments. We use equal allocation
+between treatment arms, which is specified via `r=1` for the
+experimental arms and `r0=1` for control.
+
+```{=html}
+<button class="btn btn-success btn-sm" disabled="" type="button" id="runButton">Loading
+webR...</button>
+```
+
+::: {#editor}
+library(MAMS)\
+set.seed(2910)\
+m1 <- mams(K = 3, J = 1, p = 0.65, p0 = 0.55, r = 1, r0 = 1,
+           alpha = 0.05, power = 0.9)
+:::
+
+```{=html}
+<pre><code id="out"></code></pre>
+```
+
+```{=html}
+<canvas id="canvas" width="1000" height="600" style="display: none; margin: auto; width: 700px;">
+</canvas>
+```
+
+An overview of the design is displayed with `print(m1)` or `summary(m1)`
+or simply `m1`.
+
+```{=html}
+<button class="btn btn-success btn-sm" disabled type="button" id="runButton2">
+Loading webR...
+</button>
+```
+
+::: {#editor2}
+m1
+:::
+
+```{=html}
+<pre><code id="out2"></code></pre>
+```
+
+```{=html}
+<canvas id="canvas" width="1000" height="600" style="display: none; margin: auto; width: 700px;">
+</canvas>
+```
+
+The output produced specifies the number of patients required on control
+and each treatment arm as well as the boundaries of the design. A total
+of 316 patients, 79 on control and 79 on each of the 3 experimental
+treatments, are required for this study. The null hypothesis for
+treatment k can be rejected if the corresponding test statistic is
+larger than 2.062. The same design can also be specified on the scale of
+traditional effect sizes rather than probabilities, by setting `p` and
+`p0` to `NULL` and specifying values for `delta`, `delta0`, and `sd`.
+The output will be exactly the same as for `m1`.
+
+```{=html}
+<button class="btn btn-success btn-sm" disabled type="button" id="runButton3">
+Loading webR...
+</button>
+```
+
+::: {#editor3}
+m1d <- mams(K = 3, J = 1, p = NULL, p0 = NULL, delta = 0.545,
+            delta0 = 0.178, sd = 1, r = 1, r0 = 1, alpha = 0.05,
+            power = 0.9)
+
+m1d
+:::
+
+```{=html}
+<pre><code id="out3"></code></pre>
+```
+
+```{=html}
+<canvas id="canvas" width="1000" height="600" style="display: none; margin: auto; width: 700px;">
+</canvas>
+```
+
+In the remainder of this section we will specify all effect sizes on the
+probability scale, but converting them is straightforward in R:
+
+```{=html}
+<button class="btn btn-success btn-sm" disabled type="button" id="runButton4">
+Loading webR...
+</button>
+```
+
+::: {#editor4}
+pnorm(0.545 / sqrt(2))
+:::
+
+```{=html}
+<pre><code id="out4"></code></pre>
+```
+
+```{=html}
+<canvas id="canvas" width="1000" height="600" style="display: none; margin: auto; width: 700px;">
+</canvas>
+```
+
+```{=html}
+<button class="btn btn-success btn-sm" disabled type="button" id="runButton5">
+Loading webR...
+</button>
+```
+
+::: {#editor5}
+qnorm(0.65) * sqrt(2)
+:::
+
+```{=html}
+<pre><code id="out5"></code></pre>
+```
+
+```{=html}
+<canvas id="canvas" width="1000" height="600" style="display: none; margin: auto; width: 700px;">
+</canvas>
+```
+
+## References

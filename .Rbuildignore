@@ -1,0 +1,17 @@
+^MAMS\.NEW\.Rproj$
+^\.Rproj\.user$
+.lintr
+.vscode
+.gitignore
+.github
+index.md
+NEWS.md
+test.R
+MAMS.NEW.code-workspace
+^tests
+_tests
+TODO.R
+_pkgdown.yml
+docs
+pkgdown
+vignettes

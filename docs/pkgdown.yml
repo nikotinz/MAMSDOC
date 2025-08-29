@@ -1,5 +1,5 @@
 pandoc: 3.1.9
-pkgdown: 2.1.1
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   web_only/evaluating_properties: web_only/evaluating_properties.html
@@ -10,4 +10,7 @@ articles:
   web_only/single-stage_design: web_only/single-stage_design.html
   web_only/step-down_design: web_only/step-down_design.html
   web_only/unforeseen_design_modifications: web_only/unforeseen_design_modifications.html
-last_built: 2025-02-25T23:55Z
+last_built: 2025-08-29T15:39Z
+urls:
+  reference: https://tjaki.github.io/MAMS/reference
+  article: https://tjaki.github.io/MAMS/articles

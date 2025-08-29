@@ -1,0 +1,36 @@
+url: "https://tjaki.github.io/MAMS/"
+baseurl: /MAMS/
+template:
+  bootstrap: 5
+  light-switch: true
+  template:
+  includes:
+    after_body: >
+      <script data-goatcounter="https://nikotinz.goatcounter.com/count" 
+      data-goatcounter-settings='{"allow_local": true}' 
+      async src="https://gc.zgo.at/count.js"></script>
+navbar:
+  structure:
+    left: [intro, reference, tutorials, articles, news]
+  components:
+    articles:
+      text: Tutorials
+      menu:
+        - text: Basics
+        - text: Reproducibility
+          href: articles/web_only/reproducibility.html
+        - text: Parallelisation
+          href: articles/web_only/parallelisation.html
+        - text: Design studies
+        - text: Single stage design
+          href: articles/web_only/single-stage_design.html
+        - text: Multi-stage design
+          href: articles/web_only/multi-stage_design.html
+        - text: Design operating characteristics
+          href: articles/web_only/evaluating_properties.html
+        - text: A step-down design
+          href: articles/web_only/step-down_design.html
+        - text: Unforeseen design modifications
+          href: articles/web_only/unforeseen_design_modifications.html
+        - text: Non-normal endpoints
+          href: articles/web_only/non-normal_endpoints.html

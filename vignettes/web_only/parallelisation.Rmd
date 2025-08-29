@@ -1,0 +1,33 @@
+---
+title: "Parallelisation"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Parallelisation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+bibliography: references.bib
+---
+
+### Parallelisation
+
+- Since version 2.0.0, **MAMS** relies on the package `{future.apply}` for parallel computation.\
+    The package `{future.apply}` is part of the future parallelisation framework that requires users to define their parallelisation strategy by means of the function `future::plan()`.\
+    This function takes several options like, for example:
+- `sequential`, default strategy corresponding to a computation without parallelisation;\
+- `multicore`, using separate forked R processes, available to unix/osx users;\
+- `multisession`, using separate R sessions, available to all users.\
+- `cluster`, using separate R sessions on one or more machines
+
+We refer to [@bengtsson2021] for an overview of the future framework.\
+
+The performance of each plan varies depending on the operating system and computer specifications. On personal computers, our experience suggests that
+
+- `cluster` is optimal for windows machines,
+
+- `multicore` is optimal for linux machines,
+
+- `multisession` is optimal for OSX machines.
+
+Note that, for the functions of **MAMS** to be available to workers defined by `future::plan()`, **MAMS** has to be installed at a location available under `.libPaths` (by default, R installs packages in the directory corresponding to the first element of .libPaths).
+
+## References

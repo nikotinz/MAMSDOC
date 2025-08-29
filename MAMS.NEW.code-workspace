@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"r.lsp.diagnostics": true,
+		"files.autoSave": "afterDelay"
+	}
+}

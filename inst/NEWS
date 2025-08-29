@@ -1,0 +1,191 @@
+---------------------MAMS NEWS-------------------------------------------
+
+MAMS is an R package for designing multi-arm multi stage studies. If you 
+are using the package, please cite it as 
+
+Magirr D, Jaki T, Whitehead J (2012) A generalized Dunnett Test for 
+Multi-arm Multi-stage Clinical Studies with Treatment Selection. 
+Biometrika. 99(2):494-501.
+
+and
+
+Jaki T, Pallmann PS, Magirr D (2019) The R package MAMS for designing 
+multi-arm multi-stage clinical trials. Journal of Statistical 
+Software. 31(88):4.
+
+Question or suggestions about the package can be sent to
+
+   thomas.jaki@pm.me
+
+--------------------CHANGE LOG--------------------------------------------
+Version 3.0.3
+
+  o  Fixed DTL cumulative sample size calculation in summary function
+  o  Fixed print output for summary for DTL
+  o  Fixed subscript out of bounds error in separate stopping rules for J>K
+  o  Changed the way to define the probability of 'T1 being best'
+      when 'method = "sep"', now matching the logic of other methods.  
+
+--------------------CHANGE LOG--------------------------------------------
+Version 3.0.2
+
+  o  Fixed Cohen's d effect size estimates in the summary() function 
+      for "MAMS" objects
+  o  Fixed sample size calculation when J=1 and effect sizes were
+      specified via 'delta' arguments (i.e., delta, delta0 and sd)
+
+--------------------CHANGE LOG--------------------------------------------
+Version 3.0.1
+
+  o  Added handling allocation ratios at the first stage 
+      when the control arm is greater than 1 
+      (thanks to Peter Greenstreet for the feedback)
+  o  Added extra checks for input parameters of allocation ratios
+  o  Fixed 'maximum iteration number' computation
+  o  Renamed rows and cols in rMat for 'mams' object
+
+
+--------------------CHANGE LOG--------------------------------------------
+Version 3.0.0
+
+  o  Added 2 new designs:
+      method = 'separate' for MAMS with a separate stopping rule 
+      method = 'dtl' for drop-the-losers design where 
+      method = 'simultaneous' (default) corresponds to the MAMS with a 
+      simultaneous stopping rule
+  o  refined the summary(), print() and plot() functions for "MAMS"
+      objects accordingly
+  o  updated the C code  to compile with STRICT_R_HEADERS=1 (mandatory for 
+      R >= 4.5.0)
+
+
+--------------------CHANGE LOG--------------------------------------------
+Version 2.0.2
+
+  o NA related C code bug fix related to gcc compilers
+  o Add documentation for better clarity and user guidance
+
+
+--------------------CHANGE LOG--------------------------------------------
+Version 2.0.1
+
+  o Bug fix when K=1 in mams.sim
+  o Add src/init.c file
+   
+--------------------CHANGE LOG--------------------------------------------
+Version 2.0.0
+
+  o Parallelisation framework included for several functions  
+  o Recoding of parts of the functions in C
+  o Inclusion of new package help file
+  o Update of authors
+  
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+Version 1.4.2
+
+  o Fixed an error in tite.mams
+  o Update of author contact information
+
+--------------------------------------------------------------------------
+
+Version 1.4.1
+
+  o Minor bug fix
+
+--------------------------------------------------------------------------
+Version 1.4
+
+  o Adjusted code to also provide answers for K=1 and J=1
+  o Fixed an error in tite.mams
+  o added warning to show that sample size search stopped due to
+    maximum reached
+
+--------------------------------------------------------------------------
+Version 1.3
+
+  o References updated
+
+--------------------------------------------------------------------------
+Version 1.2
+
+  o New function 'ordinal.mams' for ordinal and binary endpoints
+  o New function 'tite.mams' for time-to-event endpoints
+  o Effect sizes can be specified on traditional or probability scale
+  o Search for sample size is capped at a maximum value
+  o Harmonised function and input names (most notably, 'step_down_mams' and
+    'update_mams' are now called 'stepdown.mams' and 'stepdown.update')
+  o Corrected minor bugs in 'mams'
+    
+--------------------------------------------------------------------------
+Version 1.1
+
+  o Corrected minor bug in mams.sim for K=1
+
+--------------------------------------------------------------------------
+Version 1.0
+
+  o Altered mams function to improve consistency for different allocation
+    ratios
+
+--------------------------------------------------------------------------
+Version 0.9
+
+  o Corrected a bug in update_mams
+
+--------------------------------------------------------------------------
+Version 0.8
+
+  o Removal of some depreciated code
+
+--------------------------------------------------------------------------
+Version 0.7
+
+  o Modified print and summary to only return integer sample sizes
+  o Updated mams function to deal with minor inconsistency when J=1
+
+--------------------------------------------------------------------------
+Version 0.6
+
+  o Corrected a bug in new.bounds 
+  o Corrected a bug in mams.sim
+  o A few minor bugs in the plot functions corrected
+  o Arguments bty and las for the plot functions added
+  o Inconsistencies in the documentation removed
+
+--------------------------------------------------------------------------
+Version 0.5
+
+  o A bug in function mams.sim corrected
+
+--------------------------------------------------------------------------
+Version 0.4
+
+  o A bug in function mams corrected
+
+--------------------------------------------------------------------------
+Version 0.3
+
+  o New function (step_down_mams) to calculate stopping boundaries for all intersection hypothesis tests in a closed testing procedure.
+  o New function (update_mams) to update boundaries at an interim analysis to take account of unplanned treatment selection and/or sample size reestimation.
+  o Documentation updated
+
+--------------------------------------------------------------------------
+Version 0.2
+
+  o New function (mams.sim) to simulate mams studies included
+  o New function (new.bounds) to update boundaries based on observed 
+    number of observations included
+  o Citation information updated
+  o Output data.frame of function mams generalized 
+  o Additional option to supress sample size calculation included 
+    in function mams
+  o Documentation updated
+
+--------------------------------------------------------------------------
+Version 0.1
+
+  o Initial release
+
+--------------------------------------------------------------------------
+

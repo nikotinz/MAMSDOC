@@ -1,0 +1,132 @@
+---
+title: "Dealing with unforeseen design modifications"
+output: rmarkdown::html_vignette
+link-citations: yes
+bibliography: references.bib
+vignette: >
+  %\VignetteIndexEntry{Dealing with unforeseen design modifications}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(MAMS)
+
+m2 <- mams(K = 3, J = 2, p = 0.65, p0 = 0.55, r = 1:2, r0 = c(2, 4), 
+          alpha = 0.05, power = 0.9, ushape = "triangular", 
+          lshape = "triangular")
+
+m2.all <- stepdown.mams(nMat = matrix(c(76, 152, rep(c(38, 76), 3)),
+ nrow = 2, ncol = 4), lb = m2$l[1], alpha.star = c(0.026, 0.05),
+selection = "all.promising")
+```
+
+Two functions of the package: `new.bounds` and `stepdown.update`, allow
+for unexpected design modifications to be taken into account. The
+function `new.bounds` recalculates the boundary values when the sample
+sizes achieved are not as planned in advance. We consider again the
+two-stage design `m2` studied in the [Multi-stage design section](multi-stage_design.html) where 76 patients were required per stage in the
+control arm and 38 patients per stage for each of the three experimental
+treatment arms. Now assume these requirements could not be met and the
+observed sample sizes at the interim analysis were 75 for control and
+40, 35, and 41 for the experimental treatments. We can recalculate the
+final boundary value with new.bounds in which we specify the interim
+bounds $u = 2.359$ and $l = 0.786$ (as obtained for `m2`). The sample
+sizes as observed at stage 1 and planned for stage 2 are given in the
+$J × (K + 1)$ matrix `nMat`.
+
+```{r eval=FALSE, include=TRUE}
+m2.nb <- new.bounds(K = 3, J = 2,
+ nMat = matrix(c(75, 152, 40, 76, 35, 76, 41, 76),
+ nrow = 2, ncol = 4), alpha = 0.05, u = m2$u[1], l = m2$l[1],
+ ushape = "triangular", lshape = "triangular")
+```
+
+```{r eval=TRUE, include=FALSE}
+m2.nb <- new.bounds(K = 3, J = 2,
+ nMat = matrix(c(75, 152, 40, 76, 35, 76, 41, 76),
+ nrow = 2, ncol = 4), alpha = 0.05, u = m2$u[1], l = m2$l[1],
+ ushape = "triangular", lshape = "triangular")
+```
+
+```{r echo=FALSE}
+m2.nb
+```
+
+We find that as a result of the deviation from the planned sample size
+at the interim analysis, the final boundary value has been lowered from
+2.225 in the original `m2` design to 2.224. The function `stepdown.update`
+uses the conditional error approach to incorporate unplanned sample size
+reassessment and/or treatment selection (e.g., elimination of treatment
+arms due to safety issues) while maintaining control of the desired
+FWER. We once again base this example on the original three-arm
+two-stage design but consider the step-down version (`m2.all`) studied in the [Step-down design section](step-down_design.html) and
+assume there were some unforeseen design changes during the course of
+the trial. Initially the sample sizes at interim were planned to be 76
+for the control group and 38 per active treatment arm. At the interim
+analysis, we now wish to take into account three deviations from the
+planned study.
+
+Firstly, we want to account for the deviation from the desired sample
+size which, as in the previous example, turned out to be 75 for control
+and 40, 35, and 41 for the experimental treatments, which translates to
+`nobs = c(75, 40, 35,41)` in the function `stepdown.update()`. Secondly,
+treatment 2 has been dropped from the study due to safety, so that only
+treatment arms 1 and 3 (`selected.trts = c(1, 3)`) are to be
+continued.Finally, following a reassessment of the sample size, we wish
+to increase the cumulative sample size at the second stage by 50% from
+152 to 228 in the control arm and 76 to 114 in the active arms. We can
+specify this using `nfuture = matrix(c(228,114, 35, 114), 1, 4)`.
+
+Notice that since treatment arm 2 has already been abandoned, no
+additional patients are recruited beyond the 35 already in the study.
+Further supposing the interim evaluation yielded Z statistics of
+`zscores = c(1.1, 0.9, 0.9)`, we can calculate the modified design.
+
+```{r eval=TRUE, include=FALSE}
+m2.update <- stepdown.update(current.mams = m2.all,
+nobs = c(75, 40, 35, 41), zscores = c(1.1, 0.9, 0.9),
+selected.trts = c(1, 3), nfuture = matrix(c(228, 114, 35, 114),
+nrow = 1, ncol = 4))
+
+```
+
+```{r eval=FALSE, include=TRUE}
+m2.update <- stepdown.update(current.mams = m2.all,
+nobs = c(75, 40, 35, 41), zscores = c(1.1, 0.9, 0.9),
+selected.trts = c(1, 3), nfuture = matrix(c(228, 114, 35, 114),
+nrow = 1, ncol = 4))
+
+```
+
+We summarise in Table 3 (column “Updated”) the output of `m2.update`.
+The boundaries for the elementary hypothesis $H_1$ and $H_3$ have been
+slightly increased to account for the change in sample size while the
+boundary for $H_2$ has been slightly decreased. Similarly, the boundary
+for the intersection hypothesis involving only the remaining treatments
+($H_{13}$) has been increased while the others have been decreased. No
+change in the threshold for the global null hypothesis ($H_{123}$) is
+observed in this example. As before we can also illustrate the updated
+design using the plot function.
+
+| Hypotheses | Initial | Updated (cond. error) |
+|------------|:-------:|:---------------------:|
+| $H_1$      |  1.72   |      1.73(0.088)      |
+| $H_2$      |  1.72   |      2.02(0.069)      |
+| $H_3$      |  1.72   |      2.17(0.058)      |
+| $H_{12}$   |  2.06   |      1.71(0.056)      |
+| $H_{13}$   |  2.06   |      2.02(0.051)      |
+| $H_{23}$   |  2.06   |      2.17(0.043)      |
+| $H_{123}$  |  2.22   |      1.71(0.041)      |
+
+Initial and updated upper boundaries (with conditional errors) for the
+elementary ($H_1$, $H_2$, $H_3$), intersection ($H_{12}$, $H_{13}$,
+$H_{23}$), and global ($H_{123}$) hypotheses of a three-arm twostage
+step-down design involving selection of all promising treatments at
+interim. Treatment 2 has been dropped at the interim analysis and the
+sample size for the remaining comparisons increased.
